@@ -6,8 +6,8 @@ import App from "./app/App";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import reportWebVitals from "./reportWebVitals";
-import theme from "./theme";
 import "./css/index.css";
+import theme from "./app/MaterialTheme";
 
 ReactDOM.render(
   <React.StrictMode>
