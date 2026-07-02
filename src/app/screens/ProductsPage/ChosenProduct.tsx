@@ -7,10 +7,10 @@ import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import { useParams } from "react-router-dom"; // @ts-ignore
 import { FreeMode, Navigation, Thumbs } from "swiper";
-// import "swiper/css";
-// import "swiper/css/free-mode";
-// import "swiper/css/navigation";
-// import "swiper/css/thumbs";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
 export default function ChosenProduct() {
   return (
