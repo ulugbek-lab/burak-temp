@@ -30,12 +30,12 @@ export default function HomePage() {
   //Selector: Store => Data
 
   useEffect(() => {
+    const result = [];
     //backend server data request => Data
     // slice: Data => Store(Redux)
-    //@ts-ignore
-    setPopularDishes(result);
+    //selector: Store => Data => Ui
   }, []);
-  console.log("popularDhishes", popularDishes);
+
   return (
     <div className="homepage">
       <Statistics />

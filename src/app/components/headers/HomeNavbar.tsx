@@ -13,8 +13,8 @@ export default function HomeNavbar() {
     console.log("componentDId mount"); //DATA FETCH
     setCount(count + 1);
     return () => {
-      console.log("unmount")
-    }
+      console.log("unmount");
+    };
   }, [value]);
   /** HANDLERS */
 
