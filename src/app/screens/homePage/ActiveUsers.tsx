@@ -9,6 +9,7 @@ import { createSelector } from "reselect";
 import { retrieveTopUsers } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Member } from "../../../lib/types/member";
+
 //SELECTOR
 const topUsersRetriever = createSelector(retrieveTopUsers, (topUsers) => ({
   topUsers,

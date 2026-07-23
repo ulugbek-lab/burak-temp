@@ -6,6 +6,7 @@ import { Product } from "./product";
 //Types for all the screen components
 export interface AppRootState {
   homePage: HomePageState;
+  productsPage: ProductsPageState;
 }
 
 /** HOMEPAGE */
@@ -15,5 +16,10 @@ export interface HomePageState {
   topUsers: Member[];
 }
 /** PRODUCTS PAGE */
+export interface ProductsPageState {
+  restaurant: Member | null;
+  chosenProduct: Product | null;
+  products: Product[];
+}
 
 /** ORDERS PAGE */
