@@ -99,7 +99,7 @@ export default function Products() {
                   name={"singleResearch"}
                   placeholder={"Type here"}
                   value={searchText}
-                  onClick={(e) => setSearchText(e.target.value)}
+                  onChange={(e) => setSearchText(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") searchProductHandler();
                   }}
