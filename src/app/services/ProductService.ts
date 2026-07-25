@@ -8,6 +8,7 @@ class ProductService {
   constructor() {
     this.path = serverApi;
   }
+  // 2) STEP
   public async getProducts(input: ProductInquiry): Promise<Product[]> {
     try {
       let url = `${this.path}/product/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;

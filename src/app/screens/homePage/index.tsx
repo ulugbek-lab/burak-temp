@@ -16,20 +16,22 @@ import { ProductCollection } from "../../../lib/enums/product.enums";
 import "../../../css/home.css";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
+
 /** REDUX SLICE */
 
+// 4. STEP
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
-
+//export to use in other components
 export default function HomePage() {
   const { setPopularDishes, setNewDishes, setTopUsers } =
     actionDispatch(useDispatch());
-  //Selector: Store => Data
 
   useEffect(() => {
+    //1. STEP) ComponentDidMount
     const result = [];
     //backend server data fetch => Data
     const product = new ProductService();
@@ -40,6 +42,7 @@ export default function HomePage() {
         order: "productViews",
         productCollection: ProductCollection.DISH,
       })
+      //3.STEP
       .then((data) => {
         console.log("data passed", data);
         setPopularDishes(data);

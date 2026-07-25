@@ -23,10 +23,11 @@ const homePageSlice = createSlice({
     },
   },
 });
-// Exported to use them in cpmponents
+// Exported to use them in components separetely
 export const { setPopularDishes, setNewDishes, setTopUsers } =
   homePageSlice.actions;
 
+  // 5 STEP 
 // Exported to connect it to redux store
 const HomePageReducer = homePageSlice.reducer;
 export default HomePageReducer;
