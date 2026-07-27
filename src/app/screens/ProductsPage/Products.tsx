@@ -19,6 +19,7 @@ import ProductService from "../../services/ProductService";
 import { useAppSelector } from "../../hooks";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE AND SELECTOR  */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -28,10 +29,14 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
-export default function Products() {
+interface Productsprops {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function Products(props: Productsprops) {
+  const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useAppSelector(productsRetriever);
-
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
@@ -41,12 +46,14 @@ export default function Products() {
   });
 
   const [searchText, setSearchText] = useState<string>("");
-  const history = useHistory();
+  const history = useHistory(); // navigate (modern version)
 
   useEffect(() => {
+    console.log(productSearch);
     const product = new ProductService();
     product
       .getProducts(productSearch)
+
       .then((data) => setProducts(data))
       .catch((err) => console.log(err));
   }, [productSearch]);
@@ -246,7 +253,17 @@ export default function Products() {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className={"product-sale"}>{sizeVolume}</div>
-                        <Button className={"shop-btn"}>
+                        <Button className={"shop-btn"} onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0],
+                          })
+                          e.stopPropagation() // prevents cart from going to another page
+                        }}>
+                          
                           <img
                             src={"/icons/shopping-cart.svg"}
                             style={{ display: "flex" }}

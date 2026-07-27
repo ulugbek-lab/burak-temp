@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { RippleBadge } from "./MaterialTheme/styled";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
@@ -11,21 +10,51 @@ import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
 import HelpPage from "./screens/helpPage";
+import Test from "./screens/Test";
+import { CartItem } from "../lib/types/search";
+
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
-import Test from "./screens/Test";
 
 function App() {
   const location = useLocation();
   console.log(location);
 
+  const cartJson: string | null = localStorage.getItem("cartData");
+  const currentCart = cartJson ? JSON.parse(cartJson) : []; // parse string into json data
+  const [cartItems, setCartItems] = useState<CartItem[]>(currentCart);
+
+  /** HANDLER  */
+  const onAdd = (input: CartItem) => {
+    const exist: any = cartItems.find(
+      (item: CartItem) => item._id === input._id,
+    );
+    if (exist) {
+      const cartUpdate = cartItems.map((item: CartItem) =>
+        item._id === input._id
+          ? { ...exist, quantity: exist.quantity + 1 }
+          : item,
+      );
+      setCartItems(cartUpdate);
+      localStorage.setItem("cartData", JSON.stringify(cartUpdate)); // stringify the json
+    } else {
+      const cartUpdate = [...cartItems, { ...input }];
+      setCartItems(cartUpdate);
+      localStorage.setItem("cartData", JSON.stringify(cartUpdate));
+    }
+  };
+
   return (
     <>
-      {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
+      {location.pathname === "/" ? (
+        <HomeNavbar cartItems={cartItems} />
+      ) : (
+        <OtherNavbar cartItems={cartItems} />
+      )}
       <Switch>
         <Route path="/products">
-          <ProductsPage />
+          <ProductsPage onAdd={onAdd} />
         </Route>
         <Route path="/orders">
           <OrdersPage />

@@ -8,10 +8,6 @@ import Rating from "@mui/material/Rating";
 import { useParams } from "react-router-dom"; // @ts-ignore
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { useEffect } from "react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
 
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { setChosenProduct, setRestaurant } from "./slice";
@@ -22,6 +18,12 @@ import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 import { useDispatch, useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
+import { CartItem } from "../../../lib/types/search";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
 /** REDUX SLICE AND SELECTOR  */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -41,7 +43,12 @@ const restaurantRetriever = createSelector(
   }),
 );
 
-export default function ChosenProduct() {
+interface ChosenProductsprops {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function ChosenProduct(props: ChosenProductsprops) {
+  const { onAdd } = props;
   const { productId } = useParams<{ productId: string }>();
   const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
 
