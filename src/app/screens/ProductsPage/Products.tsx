@@ -253,17 +253,19 @@ export default function Products(props: Productsprops) {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className={"product-sale"}>{sizeVolume}</div>
-                        <Button className={"shop-btn"} onClick={(e) => {
-                          onAdd({
-                            _id: product._id,
-                            quantity: 1,
-                            name: product.productName,
-                            price: product.productPrice,
-                            image: product.productImages[0],
-                          })
-                          e.stopPropagation() // prevents cart from going to another page
-                        }}>
-                          
+                        <Button
+                          className={"shop-btn"}
+                          onClick={(e) => {
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              name: product.productName,
+                              price: product.productPrice,
+                              image: product.productImages[0],
+                            });
+                            e.stopPropagation(); // prevents cart from going to another page
+                          }}
+                        >
                           <img
                             src={"/icons/shopping-cart.svg"}
                             style={{ display: "flex" }}
