@@ -5,6 +5,10 @@ const useBasket = () => {
   const cartJson: string | null = localStorage.getItem("cartData");
   const currentCart = cartJson ? JSON.parse(cartJson) : []; // parse string into json data
   const [cartItems, setCartItems] = useState<CartItem[]>(currentCart);
+
+
+
+
   /** HANDLER  */
   const onAdd = (input: CartItem) => {
     const exist: any = cartItems.find(
@@ -25,6 +29,10 @@ const useBasket = () => {
     }
   };
 
+
+
+
+  
   const onRemove = (input: CartItem) => {
     const exist: any = cartItems.find(
       (item: CartItem) => item._id === input._id,
