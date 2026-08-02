@@ -39,7 +39,10 @@ export default function OrdersPage() {
       .catch((err) => console.log(err));
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
-      .then((data) => setProcessOrders(data))
+      .then((data) => {
+        console.log("PROCESS:", data);
+        setProcessOrders(data);
+      })
       .catch((err) => console.log(err));
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
